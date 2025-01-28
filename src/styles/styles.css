@@ -1,5 +1,15 @@
+@import "tailwindcss/base"; 
 @import "tailwindcss/preflight";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+.left-items{
+    @apply block px-4 py-2.5 bg-gray-700 rounded-xl text-xl font-bold text-white no-underline;
+}
+.left-items:hover {
+    @apply bg-gray-600;
+}
+.left-items-border{
+    @apply border-l-8 border border-indigo-400;
+}
 /* Add any custom styles below */
