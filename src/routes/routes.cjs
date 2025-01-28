@@ -3,8 +3,8 @@ const router = express.Router();
 const controller = require('../controllers/homeController.cjs');
 
 router.get('/', (req, res) => {
-  res.send('Hello World');
-})
+  res.render('index.ejs');
+});
 
 router.get('/users', controller.getAllUsers);
 
