@@ -1,2 +1,32 @@
 <h1 class="text-3xl font-semibold">Users</h1>
-<div class="mt-5 p-5 bg-gray-800 rounded">Coming soon.</div>
+
+<div class="mt-5 p-5 bg-gray-800 rounded text-white">
+  <h2 class="text-xl font-bold">Students List</h2>
+  
+  <% if (students && students.length > 0) { %>
+    <table class="mt-4 w-full border-collapse border border-gray-700">
+      <thead>
+        <tr class="bg-gray-700">
+          <th class="p-2 border border-gray-600">ID</th>
+          <th class="p-2 border border-gray-600">Full Name</th>
+          <th class="p-2 border border-gray-600">Email</th>
+          <th class="p-2 border border-gray-600">Branch</th>
+          <th class="p-2 border border-gray-600">Contact</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% students.forEach(student => { %>
+          <tr class="bg-gray-900">
+            <td class="p-2 border border-gray-600"><%= student.id %></td>
+            <td class="p-2 border border-gray-600"><%= student.full_name %></td>
+            <td class="p-2 border border-gray-600"><%= student.email %></td>
+            <td class="p-2 border border-gray-600"><%= student.branch %></td>
+            <td class="p-2 border border-gray-600"><%= student.student_contact %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } else { %>
+    <p class="mt-3 text-gray-300">No students found.</p>
+  <% } %>
+</div>

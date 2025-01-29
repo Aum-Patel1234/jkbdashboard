@@ -1,2 +1,56 @@
+# node_modules/
+# .env
+*/config.json
+
+# Node modules
 node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
 .env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Logs
+logs
+*.log
+logs/*.log
+npm-debug.log*
+yarn-debug.log*
+lerna-debug.log*
+
+# Database files
+*.sqlite
+*.sqlite-journal
+pgdata/
+pg_dump.sql
+
+# Sequelize migrations & seeders
+migrations/
+seeders/
+
+# Build artifacts
+dist/
+build/
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Tailwind CSS cache
+.tailwind/
+
+# MacOS and Linux system files
+.DS_Store
+*.pid
+*.seed
+*.pid.lock
+
+# Git-specific
+.gitignore
