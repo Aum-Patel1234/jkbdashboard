@@ -1,8 +1,8 @@
 'use strict';
 
 const { QueryTypes } = require('sequelize');
-const sequelize = require('../config/db.cjs');
-const Student = require('../models/studentModel.cjs');
+const sequelize = require('../config/db.js');
+const Student = require('../models/studentModel.js');
 
 exports.getAllUsers = async (req, res) => {
   try {
