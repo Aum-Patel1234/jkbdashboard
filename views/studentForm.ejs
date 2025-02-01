@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Registration</title>
+  <link rel="stylesheet" href="/css/tailwind.css">
+</head>
+
+<body class="bg-gray-900 text-white flex items-center justify-center h-screen">
+
+  <div class="bg-gray-800/50 backdrop-blur-md p-8 rounded-2xl shadow-lg w-11/12 max-w-6xl">
+    <h2 class="text-3xl font-bold text-center text-blue-400 mb-6">Student Registration</h2>
+
+    <form id="userForm" method="POST">
+      <div class="grid grid-cols-2 gap-6">
+
+        <!-- Column 1 -->
+        <div class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium">Full Name</label>
+            <input type="text" name="full_name" required
+              class="w-full mt-1 p-2 bg-gray-700 border border-gray-600 rounded-lg focus:ring-blue-500">
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium">Email</label>
+            <input type="email" name="email" required
+              class="w-full mt-1 p-2 bg-gray-700 border border-gray-600 rounded-lg focus:ring-blue-500">
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium">Branch</label>
+            <input type="text" name="branch" required
+              class="w-full mt-1 p-2 bg-gray-700 border border-gray-600 rounded-lg focus:ring-blue-500">
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium">Student Contact</label>
+            <input type="tel" name="student_contact" required
+              class="w-full mt-1 p-2 bg-gray-700 border border-gray-600 rounded-lg focus:ring-blue-500">
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium">Parent Contact</label>
+            <input type="tel" name="parent_contact" required
+              class="w-full mt-1 p-2 bg-gray-700 border border-gray-600 rounded-lg focus:ring-blue-500">
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium">Subjects</label>
+            <input type="text" name="subjects" placeholder="Math, Science, English"
+              class="w-full mt-1 p-2 bg-gray-700 border border-gray-600 rounded-lg focus:ring-blue-500">
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium">XII/Diploma Type</label>
+            <select name="xii_diploma_type"
+              class="w-full mt-1 p-2 bg-gray-700 border border-gray-600 rounded-lg focus:ring-blue-500">
+              <option value="XII">XII</option>
+              <option value="Diploma">Diploma</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium">XII/Diploma Score</label>
+            <input type="number" step="0.01" name="xii_diploma_score"
+              class="w-full mt-1 p-2 bg-gray-700 border border-gray-600 rounded-lg focus:ring-blue-500">
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium">CET/JEE Type</label>
+            <select name="cet_jee_type"
+              class="w-full mt-1 p-2 bg-gray-700 border border-gray-600 rounded-lg focus:ring-blue-500">
+              <option value="CET">CET</option>
+              <option value="JEE">JEE</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Column 2 -->
+        <div class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium">CET/JEE Score</label>
+            <input type="number" step="0.01" max="100" name="cet_jee_score"
+              class="w-full mt-1 p-2 bg-gray-700 border border-gray-600 rounded-lg focus:ring-blue-500">
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium">Address</label>
+            <textarea name="address" rows="2"
+              class="w-full mt-1 p-2 bg-gray-700 border border-gray-600 rounded-lg focus:ring-blue-500"></textarea>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium">College Name</label>
+            <input type="text" name="college_name"
+              class="w-full mt-1 p-2 bg-gray-700 border border-gray-600 rounded-lg focus:ring-blue-500">
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium">Password</label>
+            <input type="password" name="password" required
+              class="w-full mt-1 p-2 bg-gray-700 border border-gray-600 rounded-lg focus:ring-blue-500">
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium">Confirm Password</label>
+            <input type="password" name="c_password" required
+              class="w-full mt-1 p-2 bg-gray-700 border border-gray-600 rounded-lg focus:ring-blue-500">
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium">Total Fees</label>
+            <input type="number" step="0.01" name="totalfees" required
+              class="w-full mt-1 p-2 bg-gray-700 border border-gray-600 rounded-lg focus:ring-blue-500">
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium">Student Fees</label>
+            <input type="number" step="0.01" name="studentfees" required
+              class="w-full mt-1 p-2 bg-gray-700 border border-gray-600 rounded-lg focus:ring-blue-500">
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium">Packages</label>
+            <input type="text" name="packages" placeholder="Package1, Package2"
+              class="w-full mt-1 p-2 bg-gray-700 border border-gray-600 rounded-lg focus:ring-blue-500">
+          </div>
+
+          <!-- Submit Button -->
+          <div>
+            <button type="submit"
+              class="w-full mt-4 bg-blue-500 hover:bg-blue-600 transition py-2 rounded-lg text-white font-semibold">
+              Register Student
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById('userForm');
+
+    form.addEventListener('submit', async function (event) {
+      event.preventDefault(); // Prevent the default form submission
+
+      const formData = new FormData(form);
+
+      const formObject = {};
+      formData.forEach((value, key) => {
+        formObject[key] = value;
+      });
+
+      if (formObject['c_password'] !== formObject['password']) {
+        alert('Confirm password and password have different values');
+        return;
+      }
+      // console.log('here');
+      // console.log(JSON.stringify(formObject));
+
+      try {
+        const response = await fetch('/users/add', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formObject),
+        });
+
+        const result = await response.json();
+        // console.log(result);
+        if (response.redirected) {
+          console.log(`response url ----------- ${response.url}`);
+          window.location.href = response.url;
+        } else {
+          window.location.href = '/users';
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    });
+  </script>
+
+
+</body>
+
+</html>

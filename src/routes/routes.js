@@ -7,6 +7,10 @@ router.get('/', (req, res) => {
 });
 
 router.get('/users', controller.getAllUsers);
+router.get('/users/add', (req, res) => {
+  res.render('studentForm.ejs');
+});
+router.post('/users/add', controller.addUser);
 router.get('/subjects', controller.getAllSubjects);
 router.get('/packages', controller.getAllPackages);
 router.get('/branches', controller.getAllBranches);
