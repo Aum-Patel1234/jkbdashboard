@@ -1,12 +1,16 @@
 'use strict';
 
-const { QueryTypes } = require('sequelize');
+const { QueryTypes, Op } = require('sequelize');
 const sequelize = require('../config/db.js');
 const Student = require('../models/studentModel.js');
 
 exports.getAllUsers = async (req, res) => {
   try {
     const result = await Student.sequelize.query("SELECT * FROM students", { type: QueryTypes.SELECT });
+    // const result = await Student.findAll();
+
+    // Pagination - https://sequelize.org/docs/v6/core-concepts/model-querying-basics/#limits-and-pagination
+
     res.render('layout.ejs', { currentPath: req.path, contentPath: 'partials/users', students: result, customScript: '<script src="/js/users.js"></script>' });
   } catch (err) {
     console.log(err);
@@ -18,6 +22,11 @@ exports.getAllUsers = async (req, res) => {
   }
   // res.render('layout.ejs', { currentPath: req.path, contentPath: 'partials/users' });
 };
+
+exports.getUser = async (req, res) => {
+
+};
+
 exports.addUser = async (req, res) => {
   try {
     console.log("Received Data:", req.body);
@@ -63,6 +72,54 @@ exports.addUser = async (req, res) => {
     }
   }
 };
+exports.editUserPage = (req, res) => {
+  const id = req.params.id;
+
+  const data = Student.findAll({
+    where: {
+      id: id,
+    }
+  });
+
+  return res.render('studentForm.ejs', { data: data });
+}
+exports.editUser = (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const editedCount = Student.update({}, {});
+
+    if (editedCount === 0) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.status(200).json({ message: "User edited successfully" });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Internal server error" });
+  }
+}
+
+exports.deleteUser = (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const deletedCount = Student.destroy({
+      where: {
+        id: id
+      },
+    });
+    if (deletedCount === 0) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.status(200).json({ message: "User deleted successfully" });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Internal server error" });
+  }
+}
+
 exports.getAllSubjects = (req, res) => {
   res.render('layout.ejs', { currentPath: req.path, contentPath: 'partials/subjects', students: [] });
 };

@@ -1,10 +1,9 @@
 <h1 class="text-3xl font-semibold text-white">Users</h1>
-
 <div class="flex justify-between items-center mt-5 p-5 bg-gray-800 rounded-lg shadow-lg text-white">
   <div class="flex space-x-3">
     <input type="text" placeholder="Search by Name" class="p-2 rounded bg-gray-700 text-white focus:outline-none">
     <select class="p-2 rounded bg-gray-700 text-white focus:outline-none">
-      <option>Select role</option>
+      <option>Select Role</option>
       <option>Student</option>
       <option>Teacher</option>
     </select>
@@ -14,7 +13,7 @@
   </div>
 </div>
 
-<div class="mt-5 p-5 bg-gray-800 rounded-lg shadow-lg text-white">
+<div id="users" class="mt-5 p-5 bg-gray-800 rounded-lg shadow-lg text-white">
   <h2 class="text-xl font-bold border-b pb-2 border-gray-600">Students List</h2>
 
   <% if (students && students.length > 0) { %>

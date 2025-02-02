@@ -173,7 +173,7 @@
         const result = await response.json();
         // console.log(result);
         if (response.redirected) {
-          console.log(`response url ----------- ${response.url}`);
+          // console.log(`response url ----------- ${response.url}`);
           window.location.href = response.url;
         } else {
           window.location.href = '/users';
