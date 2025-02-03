@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "CommonJS",
+    "outDir": "dist",
+    "rootDir": "./",
+    "strict": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "strictPropertyInitialization": false,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "allowJs": true,
+    "baseUrl": ".",
+    "paths": {
+      "@config/*": ["config/*"],
+      "@models/*": ["models/*"],
+      "@migrations/*": ["migrations/*"],
+      "@seeders/*": ["seeders/*"],
+      "@views/*": ["views/*"],
+      "@public/*": ["public/*"],
+      "@src/*": ["src/*"]
+    }
+  },
+  "include": ["index.ts", "src", "config", "models", "migrations", "seeders", "views", "public"],
+  "exclude": ["node_modules", "dist"]
+}

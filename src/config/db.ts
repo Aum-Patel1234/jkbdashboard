@@ -1,7 +1,7 @@
 'use strict';
 
-const { Sequelize } = require('sequelize');
-const dotenv = require('dotenv');
+import {Sequelize} from "sequelize";
+import dotenv from "dotenv";
 
 dotenv.config();
 
@@ -13,14 +13,14 @@ dotenv.config();
 //   database: process.env.DB_NAME
 // });
 const sequelize = new Sequelize(
-  process.env.DB_NAME,   // Database name
-  process.env.DB_USER,   // Username
-  process.env.DB_PASSWORD,   // Password
+  process.env.DB_NAME as string,   // Database name
+  process.env.DB_USER as string,   // Username
+  process.env.DB_PASSWORD as string,   // Password
   {
-    host: process.env.DB_HOST, // Database host
+    host: process.env.DB_HOST as string, // Database host
     dialect: 'postgres',      // Using PostgreSQL dialect
-    port: process.env.DB_PORT, // Database port (defaults to 5432 for PostgreSQL)
-    logging: msg => console.log(msg),
+    port: process.env.DB_PORT ? parseInt(process.env.DB_PORT) : 5432, // Database port (defaults to 5432 for PostgreSQL)
+    logging: (msg:string) => console.log(msg),
     pool: {
       max: 5,                // Maximum number of connections
       min: 0,                // Minimum number of connections

@@ -1,14 +1,14 @@
-const express = require('express');
+import express,{Request, Response} from 'express';
 const router = express.Router();
-const controller = require('../controllers/controller.js');
+const controller = require('../controllers/controller');
 
-router.get('/', (req, res) => {
+router.get('/', (req:Request, res:Response) => {
   res.redirect('/users');
 });
 
 router.get('/users', controller.getAllUsers);
 // users/add should be above 'users/:id' as it is interfering
-router.get('/users/add', (req, res) => {
+router.get('/users/add', (req:Request, res:Response) => {
   res.render('studentForm.ejs');
 });
 router.post('/users/add', controller.addUser);
@@ -30,4 +30,4 @@ router.get('/logout', (req, res) => {
   res.redirect('/users');
 });
 
-module.exports = router;
+export default router;

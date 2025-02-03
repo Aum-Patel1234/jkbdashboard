@@ -1,14 +1,14 @@
 'use strict';
 
-const { QueryTypes, Op } = require('sequelize');
-const sequelize = require('../config/db.js');
-const Student = require('../models/studentModel.js');
+import { Request, Response } from 'express';
+const Student = require('../models/studentModel');
+import { QueryTypes, Op, ValidationError } from 'sequelize';
+const sequelize = require('../config/db');
 
-exports.getAllUsers = async (req, res) => {
+exports.getAllUsers = async (req: Request, res: Response): Promise<void> => {
   try {
     const result = await Student.sequelize.query("SELECT * FROM students", { type: QueryTypes.SELECT });
     // const result = await Student.findAll();
-
     // Pagination - https://sequelize.org/docs/v6/core-concepts/model-querying-basics/#limits-and-pagination
 
     res.render('layout.ejs', { currentPath: req.path, contentPath: 'partials/users', students: result, customScript: '<script src="/js/users.js"></script>' });
@@ -23,11 +23,12 @@ exports.getAllUsers = async (req, res) => {
   // res.render('layout.ejs', { currentPath: req.path, contentPath: 'partials/users' });
 };
 
-exports.getUser = async (req, res) => {
+exports.getUser = async (req: Request, res: Response) => {
 
 };
 
-exports.addUser = async (req, res) => {
+// assign the type that it returns
+exports.addUser = async (req: Request, res: Response) => {
   try {
     console.log("Received Data:", req.body);
 
@@ -38,7 +39,7 @@ exports.addUser = async (req, res) => {
       branch: req.body.branch,
       student_contact: req.body.student_contact,
       parent_contact: req.body.parent_contact,
-      subjects: req.body.subjects ? req.body.subjects.split(",").map(s => s.trim()) : [],
+      subjects: typeof(req.body.subjects) === 'string' ? req.body.subjects.split(",").map((s:string) => s.trim()) : [],
       xii_diploma_type: req.body.xii_diploma_type,
       xii_diploma_score: req.body.xii_diploma_score,
       cet_jee_type: req.body.cet_jee_type,
@@ -49,7 +50,7 @@ exports.addUser = async (req, res) => {
       c_password: req.body.c_password,
       totalfees: req.body.totalfees,
       studentfees: req.body.studentfees,
-      packages: req.body.packages ? req.body.packages.split(",").map(p => p.trim()) : [],
+      packages: typeof(req.body.packages) === 'string' ? req.body.packages.split(",").map((p:string) => p.trim()) : [],
     };
 
     if (obj.c_password !== obj.password) {
@@ -64,7 +65,7 @@ exports.addUser = async (req, res) => {
     // res.status(201).json({ message: "Student registered successfully", data: newStudent });
     res.redirect('/users');
   } catch (error) {
-    if (error.errors) {
+    if (error instanceof ValidationError) {
       error.errors.forEach((err) => {
         console.error("Validation error:", err.message);
       });
@@ -72,7 +73,8 @@ exports.addUser = async (req, res) => {
     }
   }
 };
-exports.editUserPage = (req, res) => {
+
+exports.editUserPage = (req: Request, res: Response): void => {
   const id = req.params.id;
 
   const data = Student.findAll({
@@ -82,8 +84,10 @@ exports.editUserPage = (req, res) => {
   });
 
   return res.render('studentForm.ejs', { data: data });
-}
-exports.editUser = (req, res) => {
+};
+
+// assign the type that it returns
+exports.editUser = (req: Request, res: Response) => {
   try {
     const id = req.params.id;
 
@@ -98,13 +102,14 @@ exports.editUser = (req, res) => {
     console.log(err);
     res.status(500).json({ message: "Internal server error" });
   }
-}
+};
 
-exports.deleteUser = (req, res) => {
+// assign the type that it returns
+exports.deleteUser = (req: Request, res: Response) => {
   try {
     const id = req.params.id;
 
-    const deletedCount = Student.destroy({
+    const deletedCount: number = Student.destroy({
       where: {
         id: id
       },
@@ -120,24 +125,24 @@ exports.deleteUser = (req, res) => {
   }
 }
 
-exports.getAllSubjects = (req, res) => {
+exports.getAllSubjects = (req: Request, res: Response): void => {
   res.render('layout.ejs', { currentPath: req.path, contentPath: 'partials/subjects', students: [] });
 };
-exports.getAllPackages = (req, res) => {
+exports.getAllPackages = (req: Request, res: Response): void => {
   res.render('layout.ejs', { currentPath: req.path, contentPath: 'partials/packages', students: [] });
 };
-exports.getAllBranches = (req, res) => {
+exports.getAllBranches = (req: Request, res: Response): void => {
   res.render('layout.ejs', { currentPath: req.path, contentPath: 'partials/branches', students: [] });
 };
-exports.getAllPayments = (req, res) => {
+exports.getAllPayments = (req: Request, res: Response): void => {
   res.render('layout.ejs', { currentPath: req.path, contentPath: 'partials/payments', students: [] });
 };
-exports.predict = (req, res) => {
+exports.predict = (req: Request, res: Response): void => {
   res.render('layout.ejs', { currentPath: req.path, contentPath: 'partials/predict', students: [] });
 };
-exports.attendance = (req, res) => {
+exports.attendance = (req: Request, res: Response): void => {
   res.render('layout.ejs', { currentPath: req.path, contentPath: 'partials/attendance', students: [] });
 };
-exports.tests = (req, res) => {
+exports.tests = (req: Request, res: Response): void => {
   res.render('layout.ejs', { currentPath: req.path, contentPath: 'partials/tests', students: [] });
 };
