@@ -3,7 +3,7 @@
 import { Request, Response } from 'express';
 const Student = require('../models/studentModel');
 import { QueryTypes, Op, ValidationError } from 'sequelize';
-const sequelize = require('../config/db');
+// const sequelize = require('../config/db');
 
 exports.getAllUsers = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -39,7 +39,7 @@ exports.addUser = async (req: Request, res: Response) => {
       branch: req.body.branch,
       student_contact: req.body.student_contact,
       parent_contact: req.body.parent_contact,
-      subjects: typeof(req.body.subjects) === 'string' ? req.body.subjects.split(",").map((s:string) => s.trim()) : [],
+      subjects: typeof (req.body.subjects) === 'string' ? req.body.subjects.split(",").map((s: string) => s.trim()) : [],
       xii_diploma_type: req.body.xii_diploma_type,
       xii_diploma_score: req.body.xii_diploma_score,
       cet_jee_type: req.body.cet_jee_type,
@@ -50,7 +50,7 @@ exports.addUser = async (req: Request, res: Response) => {
       c_password: req.body.c_password,
       totalfees: req.body.totalfees,
       studentfees: req.body.studentfees,
-      packages: typeof(req.body.packages) === 'string' ? req.body.packages.split(",").map((p:string) => p.trim()) : [],
+      packages: typeof (req.body.packages) === 'string' ? req.body.packages.split(",").map((p: string) => p.trim()) : [],
     };
 
     if (obj.c_password !== obj.password) {
@@ -74,30 +74,35 @@ exports.addUser = async (req: Request, res: Response) => {
   }
 };
 
-exports.editUserPage = (req: Request, res: Response): void => {
+exports.editUserPage = async (req: Request, res: Response): Promise<void> => {
   const id = req.params.id;
 
-  const data = Student.findAll({
-    where: {
-      id: id,
-    }
-  });
+  try {
+    const data = await Student.findOne({
+      where: { id: id },
+    });
 
-  return res.render('studentForm.ejs', { data: data });
+    return res.render('studentForm.ejs', { user: data });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 // assign the type that it returns
-exports.editUser = (req: Request, res: Response) => {
+exports.editUser = async (req: Request, res: Response) => {
   try {
     const id = req.params.id;
 
-    const editedCount = Student.update({}, {});
+    const [editedCount] = await Student.update(
+      { branch: req.body.branch },
+      { where: { id: id } }
+    );
 
     if (editedCount === 0) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({ message: "user not found" });
     }
 
-    res.status(200).json({ message: "User edited successfully" });
+    res.redirect('/users');
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "Internal server error" });

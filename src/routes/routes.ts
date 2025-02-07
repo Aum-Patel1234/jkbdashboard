@@ -1,15 +1,15 @@
-import express,{Request, Response} from 'express';
+import express, { Request, Response } from 'express';
 const router = express.Router();
 const controller = require('../controllers/controller');
 
-router.get('/', (req:Request, res:Response) => {
+router.get('/', (req: Request, res: Response) => {
   res.redirect('/users');
 });
 
 router.get('/users', controller.getAllUsers);
 // users/add should be above 'users/:id' as it is interfering
-router.get('/users/add', (req:Request, res:Response) => {
-  res.render('studentForm.ejs');
+router.get('/users/add', (req: Request, res: Response) => {
+  res.render('studentForm.ejs', { user: null });
 });
 router.post('/users/add', controller.addUser);
 

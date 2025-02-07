@@ -17,7 +17,7 @@
   <h2 class="text-xl font-bold border-b pb-2 border-gray-600">Students List</h2>
 
   <% if (students && students.length > 0) { %>
-    <div class="overflow-x-auto mt-4" style="max-height: 600px; overflow-y: auto;">
+    <div class="overflow-x mt-4" style="max-height: 600px; overflow-y: auto;">
       <table class="w-full border border-gray-700 rounded-lg shadow-lg h-full">
         <thead>
           <tr class="bg-gray-700 text-white text-left">
@@ -60,7 +60,11 @@
               <td class="p-3 border border-gray-600"><%= student.studentfees %></td>
               <td class="p-3 border border-gray-600"><%= student.packages ? student.packages.join(', ') : 'N/A' %></td>
               <td class="p-3 border border-gray-600 h-full flex justify-center items-center space-x-3">
-                <button id="edit-<%= student.id %>" class="bg-yellow-500 text-white p-2 rounded">Edit</button>
+              <form id="editForm-<%= student.id %>" action="/users/edit/<%= student.id %>" method="POST">
+                <button type="submit" class="bg-yellow-500 text-white p-2 rounded">
+                  Edit
+                </button>
+              </form>
                 <button id="delete-<%= student.id %>" class="bg-red-500 text-white p-2 rounded">Delete</button>
               </td>
             </tr>
