@@ -2,13 +2,13 @@ import express, { Request, Response } from 'express';
 const router = express.Router();
 const controller = require('../controllers/controller');
 
-router.get('/', (req: Request, res: Response) => {
+router.get('/', (req: Request, res: Response): void => {
   res.redirect('/users');
 });
 
 router.get('/users', controller.getAllUsers);
 // users/add should be above 'users/:id' as it is interfering
-router.get('/users/add', (req: Request, res: Response) => {
+router.get('/users/add', (req: Request, res: Response): void => {
   res.render('studentForm.ejs', { user: null });
 });
 router.post('/users/add', controller.addUser);
@@ -26,7 +26,7 @@ router.get('/predict', controller.predict);
 router.get('/attendance', controller.attendance);
 router.get('/tests', controller.tests);
 
-router.get('/logout', (req, res) => {
+router.get('/logout', (req, res): void => {
   res.redirect('/users');
 });
 

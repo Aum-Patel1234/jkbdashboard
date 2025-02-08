@@ -92,9 +92,27 @@ exports.editUserPage = async (req: Request, res: Response): Promise<void> => {
 exports.editUser = async (req: Request, res: Response) => {
   try {
     const id = req.params.id;
+    const obj = {
+      full_name: req.body.full_name,
+      email: req.body.email,
+      branch: req.body.branch,
+      student_contact: req.body.student_contact,
+      parent_contact: req.body.parent_contact,
+      subjects: typeof (req.body.subjects) === 'string' ? req.body.subjects.split(",").map((s: string) => s.trim()) : [],
+      xii_diploma_type: req.body.xii_diploma_type,
+      xii_diploma_score: req.body.xii_diploma_score,
+      cet_jee_type: req.body.cet_jee_type,
+      cet_jee_score: req.body.cet_jee_score,
+      address: req.body.address,
+      college_name: req.body.college_name,
+      password: req.body.password,
+      c_password: req.body.c_password,
+      totalfees: req.body.totalfees,
+      studentfees: req.body.studentfees,
+      packages: typeof (req.body.packages) === 'string' ? req.body.packages.split(",").map((p: string) => p.trim()) : [],
+    };
 
-    const [editedCount] = await Student.update(
-      { branch: req.body.branch },
+    const [editedCount] = await Student.update(obj,
       { where: { id: id } }
     );
 
