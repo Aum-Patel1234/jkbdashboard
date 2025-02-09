@@ -1,8 +1,8 @@
 'use strict';
 
 import { Request, Response } from 'express';
-const Student = require('../models/studentModel');
-import { QueryTypes, Op, ValidationError } from 'sequelize';
+import Student from '../models/studentModel';
+import { QueryTypes, ValidationError } from 'sequelize';
 // const sequelize = require('../config/db');
 
 exports.getAllUsers = async (req: Request, res: Response): Promise<void> => {
@@ -23,8 +23,18 @@ exports.getAllUsers = async (req: Request, res: Response): Promise<void> => {
   // res.render('layout.ejs', { currentPath: req.path, contentPath: 'partials/users' });
 };
 
-exports.getUser = async (req: Request, res: Response) => {
+exports.getUser = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const userData = await Student.findOne({
+      where: {
+        id: req.params.id,
+      }
+    });
 
+    return res.render('layout.ejs', { currentPath: req.path, contentPath: 'partials/student_detail', students: userData });
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 // assign the type that it returns

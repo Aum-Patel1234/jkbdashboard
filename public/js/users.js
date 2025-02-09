@@ -29,21 +29,23 @@ document.getElementById("users").addEventListener("click", async (e) => {
       console.error(error);
       alert("Error deleting user");
     }
-  } else if (action === "edit") {
-    // try {
-    //   fetch(`/users/edit/${id}`, {
-    //     method: "POST", // using POST for an update
-    //     headers: { "Content-Type": "application/json" },
-    //   }).then(response => response.json)
-    //     .then(data => {
-    //       console.log(data);
-    //       if (data.redirectUrl) {
-    //         window.location.href = data.redirectUrl;
-    //       }
-    //     });
-    // } catch (error) {
-    //   console.error(error);
-    //   alert("Error updating user");
-    // }
   }
 });
+
+const debounce = function (callback, time) {
+  let timeout;
+
+  return function (...args) {
+    if (timeout) {
+      clearTimeout(timeout);
+    }
+    timeout = setTimeout(() => {
+      callback(args);
+    }, time);
+  }
+};
+
+const search = document.getElementById("search");
+search.addEventListener("input", debounce(() => {
+  console.log(search.value);
+}, 750));

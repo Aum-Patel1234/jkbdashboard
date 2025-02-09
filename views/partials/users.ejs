@@ -1,7 +1,7 @@
 <h1 class="text-3xl font-semibold text-white">Users</h1>
 <div class="flex justify-between items-center mt-5 p-5 bg-gray-800 rounded-lg shadow-lg text-white">
   <div class="flex space-x-3">
-    <input type="text" placeholder="Search by Name" class="p-2 rounded bg-gray-700 text-white focus:outline-none">
+    <input id="search" type="text" placeholder="Search by Name" class="p-2 rounded bg-gray-700 text-white focus:outline-none">
     <select class="p-2 rounded bg-gray-700 text-white focus:outline-none">
       <option>Select Role</option>
       <option>Student</option>
@@ -44,7 +44,13 @@
           <% students.forEach(student => { %>
             <tr class="odd:bg-gray-900 even:bg-gray-800 hover:bg-gray-700 transition">
               <td class="p-3 border border-gray-600"><%= student.id %></td>
-              <td class="p-3 border border-gray-600"><%= student.full_name %></td>
+
+              <td class="p-3 border border-gray-600">
+                <a href="/users/<%= student.id %>" class="hover:underline">
+                  <%= student.full_name %>
+                </a>
+              </td>
+
               <td class="p-3 border border-gray-600"><%= student.email %></td>
               <td class="p-3 border border-gray-600"><%= student.branch %></td>
               <td class="p-3 border border-gray-600"><%= student.student_contact %></td>
