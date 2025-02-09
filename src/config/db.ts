@@ -1,6 +1,6 @@
 'use strict';
 
-import {Sequelize} from "sequelize";
+import { Sequelize } from "sequelize";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -20,13 +20,21 @@ const sequelize = new Sequelize(
     host: process.env.DB_HOST as string, // Database host
     dialect: 'postgres',      // Using PostgreSQL dialect
     port: process.env.DB_PORT ? parseInt(process.env.DB_PORT) : 5432, // Database port (defaults to 5432 for PostgreSQL)
-    logging: (msg:string) => console.log(msg),
+    logging: process.env.DB_LOGGING === "true" ? console.log : false,
     pool: {
-      max: 5,                // Maximum number of connections
-      min: 0,                // Minimum number of connections
+      max: 10,                // Maximum number of connections
+      min: 2,                // Minimum number of connections
       acquire: 30000,        // Maximum time (in ms) to wait for a connection
       idle: 10000            // Maximum time (in ms) a connection can be idle before being released
-    }
+    },
+    dialectOptions: process.env.DB_SSL === "true"
+      ? {
+        ssl: {
+          require: true,
+          rejectUnauthorized: false, // Allow self-signed certificates
+        },
+      }
+      : {},
   });
 
 const testConnection = async () => {

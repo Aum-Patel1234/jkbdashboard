@@ -17,7 +17,9 @@ const Student = sequelize.define("Student", {
   password: { type: DataTypes.TEXT, allowNull: false },
   totalfees: { type: DataTypes.DECIMAL(10, 2), allowNull: false },
   studentfees: { type: DataTypes.DECIMAL(10, 2), allowNull: false },
-  packages: { type: DataTypes.ARRAY(DataTypes.STRING) }
+  packages: { type: DataTypes.ARRAY(DataTypes.STRING) },
+  createdAt: { type: DataTypes.DATE, field: 'createdat' },
+  updatedAt: { type: DataTypes.DATE, field: 'updatedat' }
 },
   {
     tableName: "students",
