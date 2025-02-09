@@ -1,8 +1,8 @@
 'use strict';
 
-import { Request, Response } from 'express';
+import { query, Request, Response } from 'express';
 import Student from '../models/studentModel';
-import { QueryTypes, ValidationError } from 'sequelize';
+import { QueryTypes, Op, ValidationError } from 'sequelize';
 // const sequelize = require('../config/db');
 
 exports.getAllUsers = async (req: Request, res: Response): Promise<void> => {
@@ -32,6 +32,29 @@ exports.getUser = async (req: Request, res: Response): Promise<void> => {
     });
 
     return res.render('layout.ejs', { currentPath: req.path, contentPath: 'partials/student_detail', students: userData });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+exports.searchUser = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const query = req.body.query;
+    let userData;
+    if (query && query.length > 0) {
+      userData = await Student.findAll({
+        where: {
+          [Op.or]: [
+            { full_name: { [Op.iLike]: `%${query}%` } }, // Case-insensitive search
+            { email: { [Op.iLike]: `%${query}%` } }
+          ]
+        }
+      });
+    } else {
+      userData = await Student.findAll();
+    }
+
+    res.json(userData);
   } catch (err) {
     console.log(err);
   }

@@ -7,6 +7,7 @@ router.get('/', (req: Request, res: Response): void => {
 });
 
 router.get('/users', controller.getAllUsers);
+router.post('/users', controller.searchUser);
 // users/add should be above 'users/:id' as it is interfering
 router.get('/users/add', (req: Request, res: Response): void => {
   res.render('studentForm.ejs', { user: null });
