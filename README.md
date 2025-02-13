@@ -50,3 +50,5 @@ JKB Dashboard is a web application that allows users to view, add, edit, and del
 
 ## 📝 License
 This project is licensed under the MIT License.
+
+<a href="https://www.flaticon.com/free-icons/dashboard" title="dashboard icons">Dashboard icons created by Pixel perfect - Flaticon</a>
