@@ -12,11 +12,11 @@ app.set('views', __dirname + '/views');
 app.use(express.urlencoded({ extended: true }));          // converts the request body into an object
 app.use(express.json());
 
-app.use(express.static(path.join(__dirname, "../dist/public"))); // Ensure this points to the correct folder
+app.use(express.static(path.join(__dirname, "public")));
 // Serve styles with correct MIME type
 app.use(
   "/styles",
-  express.static(path.join(__dirname, "../dist/public/styles"), {
+  express.static(path.join(__dirname, "../public/styles"), {
     setHeaders: (res, filePath) => {
       if (filePath.endsWith(".css")) {
         res.set("Content-Type", "text/css");

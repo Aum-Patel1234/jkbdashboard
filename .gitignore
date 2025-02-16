@@ -34,7 +34,7 @@ migrations/
 seeders/
 
 # Build artifacts
-dist/
+# dist/
 build/
 
 # Editor files

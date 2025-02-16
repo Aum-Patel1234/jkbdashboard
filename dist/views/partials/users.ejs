@@ -1,0 +1,84 @@
+<h1 class="text-3xl font-semibold text-white">Users</h1>
+<div class="flex justify-between items-center mt-5 p-5 bg-gray-800 rounded-lg shadow-lg text-white">
+  <div class="flex space-x-3">
+    <input id="search" type="text" placeholder="Search by Name" class="p-2 rounded bg-gray-700 text-white focus:outline-none">
+    <select class="p-2 rounded bg-gray-700 text-white focus:outline-none">
+      <option>Select Role</option>
+      <option>Student</option>
+      <option>Teacher</option>
+    </select>
+  </div>
+  <div>
+    <a href="/users/add" class="bg-indigo-500 text-white p-2 rounded-lg inline-block">Add Student</a>
+  </div>
+</div>
+
+<div id="users" class="mt-5 p-5 bg-gray-800 rounded-lg shadow-lg text-white">
+  <h2 class="text-xl font-bold border-b pb-2 border-gray-600">Students List</h2>
+
+  <% if (students && students.length > 0) { %>
+    <div class="overflow-x mt-4" style="max-height: 600px; overflow-y: auto;">
+      <table class="w-full border border-gray-700 rounded-lg shadow-lg h-full">
+        <thead>
+          <tr class="bg-gray-700 text-white text-left">
+            <th class="p-3 border border-gray-600">ID</th>
+            <th class="p-3 border border-gray-600">Full Name</th>
+            <th class="p-3 border border-gray-600">Email</th>
+            <th class="p-3 border border-gray-600">Branch</th>
+            <th class="p-3 border border-gray-600">Contact</th>
+            <th class="p-3 border border-gray-600">Parent Contact</th>
+            <th class="p-3 border border-gray-600">Subjects</th>
+            <th class="p-3 border border-gray-600">XII/Diploma Type</th>
+            <th class="p-3 border border-gray-600">XII/Diploma Score</th>
+            <th class="p-3 border border-gray-600">CET/JEE Type</th>
+            <th class="p-3 border border-gray-600">CET/JEE Score</th>
+            <th class="p-3 border border-gray-600">Address</th>
+            <th class="p-3 border border-gray-600">College Name</th>
+            <th class="p-3 border border-gray-600">Total Fees</th>
+            <th class="p-3 border border-gray-600">Student Fees</th>
+            <th class="p-3 border border-gray-600">Packages</th>
+            <th class="p-3 border border-gray-600">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="students-table-body">
+          <% students.forEach(student => { %>
+            <tr class="odd:bg-gray-900 even:bg-gray-800 hover:bg-gray-700 transition">
+              <td class="p-3 border border-gray-600"><%= student.id %></td>
+
+              <td class="p-3 border border-gray-600">
+                <a href="/users/<%= student.id %>" class="hover:underline">
+                  <%= student.full_name %>
+                </a>
+              </td>
+
+              <td class="p-3 border border-gray-600"><%= student.email %></td>
+              <td class="p-3 border border-gray-600"><%= student.branch %></td>
+              <td class="p-3 border border-gray-600"><%= student.student_contact %></td>
+              <td class="p-3 border border-gray-600"><%= student.parent_contact %></td>
+              <td class="p-3 border border-gray-600"><%= student.subjects ? student.subjects.join(', ') : 'N/A' %></td>
+              <td class="p-3 border border-gray-600"><%= student.xii_diploma_type || 'N/A' %></td>
+              <td class="p-3 border border-gray-600"><%= student.xii_diploma_score || 'N/A' %></td>
+              <td class="p-3 border border-gray-600"><%= student.cet_jee_type || 'N/A' %></td>
+              <td class="p-3 border border-gray-600"><%= student.cet_jee_score || 'N/A' %></td>
+              <td class="p-3 border border-gray-600"><%= student.address || 'N/A' %></td>
+              <td class="p-3 border border-gray-600"><%= student.college_name || 'N/A' %></td>
+              <td class="p-3 border border-gray-600"><%= student.totalfees %></td>
+              <td class="p-3 border border-gray-600"><%= student.studentfees %></td>
+              <td class="p-3 border border-gray-600"><%= student.packages ? student.packages.join(', ') : 'N/A' %></td>
+              <td class="p-3 border border-gray-600 h-full flex justify-center items-center space-x-3">
+              <form id="editForm-<%= student.id %>" action="/users/edit/<%= student.id %>" method="POST">
+                <button type="submit" class="bg-yellow-500 text-white p-2 rounded">
+                  Edit
+                </button>
+              </form>
+                <button id="delete-<%= student.id %>" class="bg-red-500 text-white p-2 rounded">Delete</button>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  <% } else { %>
+    <p class="mt-3 text-gray-300">No students found.</p>
+  <% } %>
+</div>
