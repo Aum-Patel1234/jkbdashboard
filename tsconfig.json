@@ -3,7 +3,7 @@
     "target": "ES6",
     "module": "CommonJS",
     "outDir": "dist",
-    "rootDir": "./",
+    "rootDir": "src",
     "strict": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
@@ -14,7 +14,7 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "allowJs": true,
-    "baseUrl": ".",
+    "baseUrl": "src",
     "paths": {
       "@config/*": ["config/*"],
       "@models/*": ["models/*"],
@@ -22,9 +22,9 @@
       "@seeders/*": ["seeders/*"],
       "@views/*": ["views/*"],
       "@public/*": ["public/*"],
-      "@src/*": ["src/*"]
+      "@src/*": ["*"]
     }
   },
-  "include": ["index.ts", "src", "config", "models", "migrations", "seeders", "views", "public"],
+  "include": ["src"],
   "exclude": ["node_modules", "dist"]
 }

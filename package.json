@@ -7,9 +7,10 @@
     "tw": "npx tailwindcss -i ./src/styles/styles.css -o ./public/styles/tailwind.css --watch",
     "build:css": "npx tailwindcss -i ./src/styles/styles.css -o ./dist/styles/tailwind.css --watch",
     "start": "node dist/index",
-    "dev": "ts-node index.ts",
-    "copyviews": "copyfiles -u 1 'views/**/*' 'dist/views/'",
-    "build": "tsc"
+    "dev": "ts-node src/index.ts",
+    "copyviews": "copyfiles -u 1 'src/views/**' dist",
+    "copystatic": "cp -r src/public dist/",
+    "build": "tsc && npm run copyviews && npm run copystatic"
   },
   "keywords": [],
   "author": "",
